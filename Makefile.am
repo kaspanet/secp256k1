@@ -141,6 +141,10 @@ if ENABLE_MODULE_MULTISET
 include src/modules/multiset/Makefile.am.include
 endif
 
+if ENABLE_MODULE_SCHNORR
+include src/modules/schnorr/Makefile.am.include
+endif
+
 if ENABLE_MODULE_RECOVERY
 include src/modules/recovery/Makefile.am.include
 endif
