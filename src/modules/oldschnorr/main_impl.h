@@ -4,11 +4,11 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#ifndef SECP256K1_MODULE_SCHNORR_MAIN
-#define SECP256K1_MODULE_SCHNORR_MAIN
+#ifndef SECP256K1_MODULE_OLDSCHNORR_MAIN
+#define SECP256K1_MODULE_OLDSCHNORR_MAIN
 
-#include "include/secp256k1_schnorr.h"
-#include "modules/schnorr/schnorr_impl.h"
+#include "include/secp256k1_oldschnorr.h"
+#include "modules/oldschnorr/oldschnorr_impl.h"
 
 int secp256k1_schnorr_verify(
     const secp256k1_context* ctx,

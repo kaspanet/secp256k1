@@ -5162,16 +5162,17 @@ void run_ecdsa_openssl(void) {
 # include "modules/ecdh/tests_impl.h"
 #endif
 
+
+#ifdef ENABLE_MODULE_OLDSCHNORR
+# include "modules/oldschnorr/tests_impl.h"
+#endif
+
 #ifdef ENABLE_MODULE_MULTISET
 # include "modules/multiset/tests_impl.h"
 #endif
 
 #ifdef ENABLE_MODULE_RECOVERY
 # include "modules/recovery/tests_impl.h"
-#endif
-
-#ifdef ENABLE_MODULE_SCHNORR
-# include "modules/schnorr/tests_impl.h"
 #endif
 
 int main(int argc, char **argv) {
@@ -5308,14 +5309,15 @@ int main(int argc, char **argv) {
     run_multiset_tests();
 #endif
 
+#ifdef ENABLE_MODULE_OLDSCHNORR
+    /* Oldschnorr tests */
+    printf("running oldschnorr tests\n");
+    run_oldschnorr_tests();
+#endif
+
 #ifdef ENABLE_MODULE_RECOVERY
     /* ECDSA pubkey recovery tests */
     run_recovery_tests();
-#endif
-
-#ifdef ENABLE_MODULE_SCHNORR
-    /* Schnorr signature tests */
-    run_schnorr_tests();
 #endif
 
     secp256k1_rand256(run32);

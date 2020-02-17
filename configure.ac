@@ -134,6 +134,11 @@ AC_ARG_ENABLE(module_multiset,
     [enable_module_multiset=$enableval],
     [enable_module_multiset=no])
 
+AC_ARG_ENABLE(module_oldschnorr,
+    AS_HELP_STRING([--enable-module-oldschnorr],[enable oldschnorr module (experimental)]),
+    [enable_module_oldschnorr=$enableval],
+    [enable_module_oldschnorr=no])
+
 AC_ARG_ENABLE(module_recovery,
     AS_HELP_STRING([--enable-module-recovery],[enable ECDSA pubkey recovery module [default=no]]),
     [enable_module_recovery=$enableval],
@@ -143,11 +148,6 @@ AC_ARG_ENABLE(external_default_callbacks,
     AS_HELP_STRING([--enable-external-default-callbacks],[enable external default callback functions [default=no]]),
     [use_external_default_callbacks=$enableval],
     [use_external_default_callbacks=no])
-
-AC_ARG_ENABLE(module_schnorr,
-    AS_HELP_STRING([--enable-module-schnorr],[enable Schnorr signatures module (default is yes)]),
-    [enable_module_schnorr=$enableval],
-    [enable_module_schnorr=yes])
 
 AC_ARG_WITH([field], [AS_HELP_STRING([--with-field=64bit|32bit|auto],
 [finite field implementation to use [default=auto]])],[req_field=$withval], [req_field=auto])
@@ -498,12 +498,12 @@ if test x"$enable_module_multiset" = x"yes"; then
   AC_DEFINE(ENABLE_MODULE_MULTISET, 1, [Define this symbol to enable the multiset module])
 fi
 
-if test x"$enable_module_recovery" = x"yes"; then
-  AC_DEFINE(ENABLE_MODULE_RECOVERY, 1, [Define this symbol to enable the ECDSA pubkey recovery module])
+if test x"$enable_module_oldschnorr" = x"yes"; then
+  AC_DEFINE(ENABLE_MODULE_OLDSCHNORR, 1, [Define this symbol to enable the oldschnorr module])
 fi
 
-if test x"$enable_module_schnorr" = x"yes"; then
-  AC_DEFINE(ENABLE_MODULE_SCHNORR, 1, [Define this symbol to enable the Schnorr signature module])
+if test x"$enable_module_recovery" = x"yes"; then
+  AC_DEFINE(ENABLE_MODULE_RECOVERY, 1, [Define this symbol to enable the ECDSA pubkey recovery module])
 fi
 
 AC_C_BIGENDIAN()
@@ -522,6 +522,7 @@ if test x"$enable_experimental" = x"yes"; then
   AC_MSG_NOTICE([Experimental features do not have stable APIs or properties, and may not be safe for production use.])
   AC_MSG_NOTICE([Building ECDH module: $enable_module_ecdh])
   AC_MSG_NOTICE([Building multiset module: $enable_module_multiset])
+  AC_MSG_NOTICE([Building oldschnorr module: $enable_module_oldschnorr])
   AC_MSG_NOTICE([******])
 else
   if test x"$enable_module_ecdh" = x"yes"; then
@@ -529,6 +530,9 @@ else
   fi
   if test x"$enable_module_multiset" = x"yes"; then
     AC_MSG_ERROR([Multiset module is experimental. Use --enable-experimental to allow.])
+  fi
+  if test x"$enable_module_oldschnorr" = x"yes"; then
+      AC_MSG_ERROR([oldschnorr module is experimental. Use --enable-experimental to allow.])
   fi
   if test x"$set_asm" = x"arm"; then
     AC_MSG_ERROR([ARM assembly optimization is experimental. Use --enable-experimental to allow.])
@@ -548,8 +552,8 @@ AM_CONDITIONAL([USE_BENCHMARK], [test x"$use_benchmark" = x"yes"])
 AM_CONDITIONAL([USE_ECMULT_STATIC_PRECOMPUTATION], [test x"$set_precomp" = x"yes"])
 AM_CONDITIONAL([ENABLE_MODULE_ECDH], [test x"$enable_module_ecdh" = x"yes"])
 AM_CONDITIONAL([ENABLE_MODULE_MULTISET], [test x"$enable_module_multiset" = x"yes"])
+AM_CONDITIONAL([ENABLE_MODULE_OLDSCHNORR], [test x"$enable_module_oldschnorr" = x"yes"])
 AM_CONDITIONAL([ENABLE_MODULE_RECOVERY], [test x"$enable_module_recovery" = x"yes"])
-AM_CONDITIONAL([ENABLE_MODULE_SCHNORR], [test x"$enable_module_schnorr" = x"yes"])
 AM_CONDITIONAL([USE_EXTERNAL_ASM], [test x"$use_external_asm" = x"yes"])
 AM_CONDITIONAL([USE_ASM_ARM], [test x"$set_asm" = x"arm"])
 
@@ -569,6 +573,7 @@ echo "  with benchmarks         = $use_benchmark"
 echo "  with coverage           = $enable_coverage"
 echo "  module ecdh             = $enable_module_ecdh"
 echo "  module multiset         = $enable_module_multiset"
+echo "  module oldschnorr       = $enable_module_oldschnorr"
 echo "  module recovery         = $enable_module_recovery"
 echo
 echo "  asm                     = $set_asm"

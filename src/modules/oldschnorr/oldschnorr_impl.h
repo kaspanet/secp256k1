@@ -4,12 +4,12 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php. *
  ***********************************************************************/
 
-#ifndef _SECP256K1_SCHNORR_IMPL_H_
-#define _SECP256K1_SCHNORR_IMPL_H_
+#ifndef _SECP256K1_OLDSCHNORR_IMPL_H_
+#define _SECP256K1_OLDSCHNORR_IMPL_H_
 
 #include <string.h>
 
-#include "schnorr.h"
+#include "oldschnorr.h"
 #include "field.h"
 #include "group.h"
 #include "hash.h"
@@ -64,7 +64,6 @@ static int secp256k1_schnorr_sig_verify(
     }
 
     /* Extract s */
-    overflow = 0;
     secp256k1_scalar_set_b32(&s, sig64 + 32, &overflow);
     if (overflow) {
         return 0;

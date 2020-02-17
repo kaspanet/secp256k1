@@ -4,10 +4,10 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#ifndef SECP256K1_MODULE_SCHNORR_TESTS
-#define SECP256K1_MODULE_SCHNORR_TESTS
+#ifndef SECP256K1_MODULE_OLDSCHNORR_TESTS
+#define SECP256K1_MODULE_OLDSCHNORR_TESTS
 
-#include "include/secp256k1_schnorr.h"
+#include "include/secp256k1_oldschnorr.h"
 
 void test_schnorr_end_to_end(void) {
     unsigned char privkey[32];
@@ -509,7 +509,7 @@ void run_schnorr_compact_test(void) {
     }
 }
 
-void run_schnorr_tests(void) {
+void run_oldschnorr_tests(void) {
     int i;
     for (i = 0; i < 32 * count; i++) {
         test_schnorr_end_to_end();

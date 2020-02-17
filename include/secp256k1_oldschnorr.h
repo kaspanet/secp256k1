@@ -1,11 +1,11 @@
-#ifndef _SECP256K1_SCHNORR_
-# define _SECP256K1_SCHNORR_
+#ifndef _SECP256K1_OLDSCHNORR_
+#define _SECP256K1_OLDSCHNORR_
 
-# include "secp256k1.h"
+#include "secp256k1.h"
 
-# ifdef __cplusplus
+#ifdef __cplusplus
 extern "C" {
-# endif
+#endif
 
 /**
  * Verify a signature created by secp256k1_schnorr_sign.
@@ -48,10 +48,10 @@ SECP256K1_API int secp256k1_schnorr_sign(
   const unsigned char *seckey,
   secp256k1_nonce_function noncefp,
   const void *ndata
-) SECP256K1_ARG_NONNULL(1) SECP256K1_ARG_NONNULL(2) SECP256K1_ARG_NONNULL(3) SECP256K1_ARG_NONNULL(4) SECP256K1_ARG_NONNULL(5);
+) SECP256K1_ARG_NONNULL(1) SECP256K1_ARG_NONNULL(2) SECP256K1_ARG_NONNULL(3) SECP256K1_ARG_NONNULL(4);
 
-# ifdef __cplusplus
+#ifdef __cplusplus
 }
-# endif
+#endif
 
 #endif
