@@ -8,11 +8,6 @@
 #define _SECP256K1_MODULE_MULTISET_TESTS_
 
 
-#include "include/secp256k1.h"
-#include "include/secp256k1_multiset.h"
-#include "util.h"
-#include "testrand.h"
-
 #define DATALEN   64*3
 #define DATACOUNT 100
 
@@ -37,13 +32,7 @@ static unsigned char elements[DATACOUNT][DATALEN];
 
 /* Create random data */
 static void initdata(void) {
-    int n,m;
-    for(n=0; n < DATACOUNT; n++) {
-        for(m=0; m < DATALEN/4; m++) {
-            ((uint32_t*) elements[n])[m] = secp256k1_rand32();
-        }
-
-    }
+    secp256k1_rand_bytes_test(&elements[0][0], DATACOUNT*DATALEN);
 }
 
 void test_unordered(void) {
