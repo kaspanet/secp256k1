@@ -5162,11 +5162,6 @@ void run_ecdsa_openssl(void) {
 # include "modules/ecdh/tests_impl.h"
 #endif
 
-
-#ifdef ENABLE_MODULE_OLDSCHNORR
-# include "modules/oldschnorr/tests_impl.h"
-#endif
-
 #ifdef ENABLE_MODULE_MULTISET
 # include "modules/multiset/tests_impl.h"
 #endif
@@ -5307,12 +5302,6 @@ int main(int argc, char **argv) {
     /* ECMH tests */
     printf("running multiset tests\n");
     run_multiset_tests();
-#endif
-
-#ifdef ENABLE_MODULE_OLDSCHNORR
-    /* Oldschnorr tests */
-    printf("running oldschnorr tests\n");
-    run_oldschnorr_tests();
 #endif
 
 #ifdef ENABLE_MODULE_RECOVERY
